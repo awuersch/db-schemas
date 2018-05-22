@@ -1,0 +1,14 @@
+DROP VIEW view_load_typed_env;
+DROP TABLE load_typed_env;
+DROP VIEW view_load_env_type_property;
+DROP TABLE load_env_type_property;
+DROP VIEW view_load_encoding;
+DROP TABLE load_encoding;
+DROP VIEW view_load_env_type;
+DROP TABLE load_env_type;
+DROP VIEW view_load_env_property_value;
+DROP TABLE load_env_property_value;
+DROP VIEW view_load_property;
+DROP TABLE load_property;
+DROP VIEW view_load_env;
+DROP TABLE load_env;

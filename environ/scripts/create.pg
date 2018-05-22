@@ -1,0 +1,3 @@
+\ir ../ddl/db.pg
+\c environ
+\ir ../ddl/table.pg

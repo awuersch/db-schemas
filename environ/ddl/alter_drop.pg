@@ -1,0 +1,39 @@
+/* DATABASE environ; */
+
+ALTER TABLE typed_env
+DROP CONSTRAINT pk_typed_env
+,DROP CONSTRAINT uk_typed_env_1
+,DROP CONSTRAINT fk_typed_env_1
+,DROP CONSTRAINT fk_typed_env_2
+;
+
+ALTER TABLE env_type_property
+DROP CONSTRAINT pk_env_type_property
+,DROP CONSTRAINT uk_env_type_property_1
+,DROP CONSTRAINT uk_env_type_property_2
+,DROP CONSTRAINT fk_env_type_property_1
+,DROP CONSTRAINT fk_env_type_property_2
+;
+
+ALTER TABLE env_type
+DROP CONSTRAINT pk_env_type
+,DROP CONSTRAINT uk_env_type_1
+;
+
+ALTER TABLE env_property_value
+DROP CONSTRAINT pk_env_property_value
+,DROP CONSTRAINT uk_env_property_value_1
+,DROP CONSTRAINT fk_env_property_value_1
+,DROP CONSTRAINT fk_env_property_value_1
+;
+
+ALTER TABLE property
+DROP CONSTRAINT pk_property,
+DROP CONSTRAINT uk_property_1
+;
+
+ALTER TABLE env
+DROP CONSTRAINT pk_env
+,DROP CONSTRAINT uk_env_1
+;
+

@@ -1,0 +1,65 @@
+/* untyped and typed environments,
+ * used mostly for template dictionaries.
+ *
+ * untyped envs are unordered maps from properties to UTF8 values.
+ * typed envs add map orderings and value encodings to untyped envs.
+ *
+ * map orderings let values be template strings using earlier properties.
+ * value encodings let values be translated to IDNA equivalents.
+ */
+
+/* DATABASE environ; */
+
+/* a named function from properties to values */
+CREATE TABLE env (
+  id SERIAL
+  ,name TEXT NOT NULL
+);
+
+/* an untyped (UTF8 string) property */
+CREATE TABLE property (
+  id SERIAL
+  ,name TEXT NOT NULL
+);
+
+/* a property to value map, pinned to an environment */
+CREATE TABLE env_property_value (
+  id SERIAL
+  ,env_id INTEGER NOT NULL
+  ,property_id INTEGER NOT NULL
+  ,value TEXT NOT NULL
+);
+
+/* a named ordered list of (property, encoding) pairs */
+CREATE TABLE env_type (
+  id SERIAL
+  ,name TEXT NOT NULL
+);
+
+/* typed environment value encoding
+ * choices: ASCII, UTF8
+ * IDNA (punycode) encoding will transform UTF8 to ASCII
+ *
+ * "encoding" is a non-reserved PostgreSQL keyword.
+ */
+CREATE TABLE encoding {
+  id SERIAL
+  ,name TEXT NOT NULL
+);
+
+/* a member of an ordered (property, encoding) list pinned to an env_type */
+CREATE TABLE env_type_property (
+  id SERIAL
+  ,type_id INTEGER NOT NULL
+  ,property_id INTEGER NOT NULL
+  ,encoding_id INTEGER NOT NULL
+  ,ordinal_position INTEGER NOT NULL
+);
+
+/* an named, ordered property to value map, pinned to an env and an env_type */
+CREATE TABLE typed_env (
+  id SERIAL
+  ,type_id INTEGER NOT NULL
+  ,env_id INTEGER NOT NULL
+  ,name TEXT NOT NULL
+);

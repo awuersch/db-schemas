@@ -1,0 +1,90 @@
+CREATE TABLE load_env (
+  name TEXT NOT NULL
+);
+
+CREATE VIEW view_load_env AS
+SELECT * FROM load_env
+;
+
+CREATE TABLE load_property (
+  name TEXT NOT NULL
+);
+
+CREATE VIEW view_load_property AS
+SELECT * FROM load_property
+;
+
+CREATE TABLE load_env_property_value (
+  env_name TEXT NOT NULL
+  ,property_name TEXT NOT NULL
+  ,value TEXT NOT NULL
+);
+
+CREATE VIEW view_load_env_property_value AS
+  SELECT
+    e.id AS env_id
+    ,p.id AS property_id
+    ,l.value
+  FROM
+    load_env_property_value l
+    JOIN env e ON l.env_name = e.name
+    JOIN property p ON l.property_name = p.name
+;
+
+CREATE TABLE load_env_type (
+  name TEXT NOT NULL
+);
+
+CREATE VIEW view_load_env_type AS
+SELECT * FROM load_env_type
+;
+
+CREATE TABLE load_encoding (
+  name TEXT NOT NULL
+);
+
+CREATE VIEW view_load_encoding AS
+SELECT * FROM load_encoding
+;
+
+CREATE TABLE load_env_type_property (
+  type_name TEXT NOT NULL
+  ,property_name TEXT NOT NULL
+  ,encoding_name TEXT NOT NULL
+  ,ordinal_position INTEGER NOT NULL
+);
+
+CREATE VIEW view_load_env_type_property AS
+SELECT
+  t.id AS type_id
+  ,p.id AS property_id
+  ,e.id AS encoding_id
+  ,l.ordinal_position
+FROM
+  load_env_type_property l
+  JOIN env_type t
+  ON l.type_name = t.name
+  JOIN property p
+  ON l.property_name = p.name
+  JOIN encoding e
+  ON l.encoding_name = e.name
+;
+
+CREATE TABLE load_typed_env (
+  type_name TEXT NOT NULL
+  ,env_name TEXT NOT NULL
+  ,name TEXT NOT NULL
+);
+
+CREATE VIEW view_load_typed_env AS
+SELECT
+  t.id AS type_id,
+  e.id AS env_id,
+  l.name
+FROM
+  load_typed_env l
+  JOIN env_type t
+  ON l.type_name = t.name
+  JOIN env e
+  ON l.env_name = e.name
+;

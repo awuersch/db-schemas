@@ -1,0 +1,107 @@
+/* DATABASE environ; */
+
+ALTER TABLE env
+/* primary key id */
+ADD CONSTRAINT pk_env
+PRIMARY KEY (id)
+
+/* unique key name */
+,ADD CONSTRAINT uk_env_1
+UNIQUE (type_id, name)
+;
+
+ALTER TABLE property (
+/* primary key id */
+ADD CONSTRAINT pk_property
+PRIMARY KEY (id)
+
+/* unique key name */
+,ADD CONSTRAINT uk_property_1
+UNIQUE (name)
+;
+
+ALTER TABLE env_property_value
+/* primary key id */
+ADD CONSTRAINT pk_env_property_value
+PRIMARY KEY (id)
+
+/* unique key env_id, property_id */
+,ADD CONSTRAINT uk_env_property_value_1
+UNIQUE (env_id, property_id)
+
+/* foreign key env_id */
+,ADD CONSTRAINT fk_env_property_value_1
+FOREIGN KEY (env_id)
+REFERENCES env (id)
+ON DELETE CASCADE
+ON UPDATE CASCADE
+
+/* foreign key property_id */
+,ADD CONSTRAINT fk_env_property_value_1
+FOREIGN KEY (property_id)
+REFERENCES property (id)
+ON DELETE CASCADE
+ON UPDATE CASCADE
+;
+
+ALTER TABLE env_type
+/* primary key id */
+ADD CONSTRAINT pk_env_type
+PRIMARY KEY (id)
+
+/* unique key name */
+,ADD CONSTRAINT uk_env_type_1
+UNIQUE (name)
+;
+
+ALTER TABLE env_type_property
+/* primary key id */
+ADD CONSTRAINT pk_env_type_property
+PRIMARY KEY (id)
+
+/* unique key type_id, property_id */
+,ADD CONSTRAINT uk_env_type_property_1
+UNIQUE (type_id, property_id)
+
+/* unique key ordinal_position */
+,ADD CONSTRAINT uk_env_type_property_2
+UNIQUE (type_id, ordinal_position)
+
+/* foreign key type_id */
+,ADD CONSTRAINT fk_env_type_property_1
+FOREIGN KEY (type_id)
+REFERENCES env_type (id)
+ON DELETE CASCADE
+ON UPDATE CASCADE
+
+/* foreign key property_id */
+,ADD CONSTRAINT fk_env_type_property_2
+FOREIGN KEY (property_id)
+REFERENCES property (id)
+ON DELETE CASCADE
+ON UPDATE CASCADE
+;
+
+ALTER TABLE typed_env
+/* primary key id */
+ADD CONSTRAINT pk_typed_env
+PRIMARY KEY (id)
+
+/* unique key type_id, env_id */
+,ADD CONSTRAINT uk_typed_env_1
+UNIQUE (type_id, env_id)
+
+/* foreign key type_id */
+,ADD CONSTRAINT fk_typed_env_1
+FOREIGN KEY (type_id)
+REFERENCES env_type (id)
+ON DELETE CASCADE
+ON UPDATE CASCADE
+
+/* foreign key env_id */
+,ADD CONSTRAINT fk_typed_env_2
+FOREIGN KEY (env_id)
+REFERENCES env (id)
+ON DELETE CASCADE
+ON UPDATE CASCADE
+;
