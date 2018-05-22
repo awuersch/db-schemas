@@ -7,10 +7,10 @@ PRIMARY KEY (id)
 
 /* unique key name */
 ,ADD CONSTRAINT uk_env_1
-UNIQUE (type_id, name)
+UNIQUE (name)
 ;
 
-ALTER TABLE property (
+ALTER TABLE property
 /* primary key id */
 ADD CONSTRAINT pk_property
 PRIMARY KEY (id)
@@ -37,7 +37,7 @@ ON DELETE CASCADE
 ON UPDATE CASCADE
 
 /* foreign key property_id */
-,ADD CONSTRAINT fk_env_property_value_1
+,ADD CONSTRAINT fk_env_property_value_2
 FOREIGN KEY (property_id)
 REFERENCES property (id)
 ON DELETE CASCADE

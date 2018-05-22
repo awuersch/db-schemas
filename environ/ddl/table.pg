@@ -42,7 +42,7 @@ CREATE TABLE env_type (
  *
  * "encoding" is a non-reserved PostgreSQL keyword.
  */
-CREATE TABLE encoding {
+CREATE TABLE encoding (
   id SERIAL
   ,name TEXT NOT NULL
 );

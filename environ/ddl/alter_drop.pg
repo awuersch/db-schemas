@@ -24,7 +24,7 @@ ALTER TABLE env_property_value
 DROP CONSTRAINT pk_env_property_value
 ,DROP CONSTRAINT uk_env_property_value_1
 ,DROP CONSTRAINT fk_env_property_value_1
-,DROP CONSTRAINT fk_env_property_value_1
+,DROP CONSTRAINT fk_env_property_value_2
 ;
 
 ALTER TABLE property
